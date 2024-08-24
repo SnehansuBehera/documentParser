@@ -1,4 +1,3 @@
-// index.js
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -8,8 +7,8 @@ import path from 'path';
 import cors from 'cors';
 
 dotenv.config();
-app.use(cors());
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
@@ -20,7 +19,6 @@ mongoose.connect(process.env.MONGO_URI, {
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.log(err));
 
-// Set up multer for file uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/');
@@ -31,7 +29,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// Define a route to handle file uploads
 app.post('/upload', upload.single('file'), (req, res) => {
     if (req.file) {
         res.status(200).json({ filename: req.file.filename });
@@ -40,6 +37,5 @@ app.post('/upload', upload.single('file'), (req, res) => {
     }
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

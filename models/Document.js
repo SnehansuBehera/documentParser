@@ -1,5 +1,5 @@
 // models/Document.js
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const DocumentSchema = new mongoose.Schema({
     filename: {

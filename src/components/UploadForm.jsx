@@ -12,7 +12,7 @@ const UploadForm = ({ setFilename }) => {
         const formData = new FormData();
         formData.append('file', file);
 
-        const res = await axios.post('/upload', formData);
+        const res = await axios.post('http://localhost:5000/upload', formData);
         setFilename(res.data.filename);
     };
 
